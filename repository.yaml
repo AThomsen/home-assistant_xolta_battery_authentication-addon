@@ -1,0 +1,4 @@
+# https://developers.home-assistant.io/docs/add-ons/repository#repository-configuration
+name: Xolta battery authentication add-on repository
+url: 'https://github.com/AThomsen/home-assistant_xolta_battery_authentication-addon'
+maintainer: Anders Thomsen
