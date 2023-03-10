@@ -1,5 +1,5 @@
 ARG BUILD_ARCH
-FROM ghcr.io/hassio-addons/debian-base/${BUILD_ARCH}:5.3.0
+FROM ghcr.io/hassio-addons/debian-base/${BUILD_ARCH}:6.2.3
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 

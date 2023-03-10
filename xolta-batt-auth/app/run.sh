@@ -1,4 +1,4 @@
 #!/usr/bin/with-contenv bashio
 
-echo "Running flask hello world"
+echo "Running xolta api authenticator helper"
 python3 /app/app.py

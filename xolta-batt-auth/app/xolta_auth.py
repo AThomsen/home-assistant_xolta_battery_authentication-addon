@@ -32,7 +32,6 @@ class XoltaBattAuthenticator():
             try:
                 self.log("Start Request")
                 browser.get('https://app.xolta.com/')
-                #time.sleep(timeout)
 
                 self.log("Login form")
 
