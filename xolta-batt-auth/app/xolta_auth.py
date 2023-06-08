@@ -27,7 +27,7 @@ class XoltaBattAuthenticator():
             chrome_options.add_argument('--no-sandbox')
             chrome_options.add_argument('--disable-gpu')
             chrome_options.add_argument('--disable-dev-shm-usage')
-            browser = webdriver.Chrome('chromedriver', options=chrome_options)
+            browser = webdriver.Chrome(options=chrome_options)
 
             try:
                 self.log("Start Request")
