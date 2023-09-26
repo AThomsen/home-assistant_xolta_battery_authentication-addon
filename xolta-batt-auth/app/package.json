@@ -1,0 +1,13 @@
+{
+    "name": "Home Assistant Add-on: Xolta battery authentication helper",
+    "version": "1.0.0",
+    "author": "Anders Thomsen <mail@andersthomsen.dk",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "express": "^4.18.2",
+        "puppeteer-core": "^21.3.4"
+    }
+}
