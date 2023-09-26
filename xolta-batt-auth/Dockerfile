@@ -3,7 +3,7 @@ FROM $BUILD_FROM
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-RUN apk add --update nodejs npm chromium
+RUN apk add --update --no-cache nodejs npm chromium
 
 WORKDIR /app
 
