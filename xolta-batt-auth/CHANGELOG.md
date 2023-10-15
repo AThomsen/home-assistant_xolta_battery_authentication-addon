@@ -1,5 +1,9 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 1.1.1
+ - Increase login timeout
+ - Update dependencies.
+
 ## 1.1.0
 
 - Change from Debian base to Alpine

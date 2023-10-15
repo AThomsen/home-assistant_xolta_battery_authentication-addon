@@ -1,8 +1,7 @@
 const puppeteer = require('puppeteer-core');
-//import puppeteer from 'puppeteer-core';
 
 async function doLogin(username, password) {
-    const timeout = 5000; // 5 seconds
+    const timeout = 10000; // 10 seconds
 
     const start_time = Date.now();
     const auth_response = {};
