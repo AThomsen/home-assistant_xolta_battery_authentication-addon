@@ -1,5 +1,8 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 1.1.2
+ - Add 500ms sleep. This was removed from the python version but still seems to be needed.
+
 ## 1.1.1
  - Increase login timeout
  - Update dependencies.

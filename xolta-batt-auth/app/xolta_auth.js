@@ -1,5 +1,9 @@
 const puppeteer = require('puppeteer-core');
 
+function sleep(ms) {
+    return new Promise((resolve) => setInterval(resolve, ms));
+}
+
 async function doLogin(username, password) {
     const timeout = 10000; // 10 seconds
 
@@ -26,6 +30,9 @@ async function doLogin(username, password) {
             await page.type('#password', password);
 
             const submitButton = await page.waitForSelector('#next', { timeout });
+
+            // Wait for ½ second as this seems to fix issues for some.
+            await sleep(500);
             
             // set up listeners
             const submitResponseWaitForPromise = page.waitForResponse(response => response.url().includes('B2C_1_sisu/SelfAsserted') && response.status() === 200, { timeout });
