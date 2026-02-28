@@ -1,4 +1,10 @@
+const pino = require('pino')
+
 const puppeteer = require('puppeteer-core');
+
+const logger = pino({
+    timestamp: pino.stdTimeFunctions.isoTime,
+})
 
 function sleep(ms) {
     return new Promise((resolve) => setInterval(resolve, ms));
@@ -11,28 +17,28 @@ async function doLogin(username, password) {
     const auth_response = {};
 
     try {
-        console.log("Xolta: requesting site");
+        logger.info("Xolta: requesting site");
         const browser = await puppeteer.launch({
-            headless: 'new',
+            headless: false,
             executablePath: '/usr/bin/chromium',
             args: ['--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage'],
         });
         
         try {
-            console.log("Start Request");
+            logger.info("Start Request");
             const page = await browser.newPage();
-            await page.goto('https://app.xolta.com/');
+            await page.goto('https://app.xolta.com/', { waitUntil: 'domcontentloaded' });
 
-            console.log("Login form");
+            logger.info("Reached login form");
 
             await page.waitForSelector('#email');
-            await page.type('#email', username);
-            await page.type('#password', password);
-
             const submitButton = await page.waitForSelector('#next', { timeout });
 
-            // Wait for ½ second as this seems to fix issues for some.
-            await sleep(500);
+            // Wait for 1½ second as this seems to fix issues for some.
+            await sleep(1500);
+
+            await page.type('#email', username);
+            await page.type('#password', password);
             
             // set up listeners
             const submitResponseWaitForPromise = page.waitForResponse(response => response.url().includes('B2C_1_sisu/SelfAsserted') && response.status() === 200, { timeout });
@@ -54,7 +60,7 @@ async function doLogin(username, password) {
                 Object.assign(auth_response, data);
                 login_ok = data.status === '200';
             } catch {
-                // On successfull login, no body is returned and "submitResponse.json()" wil fail. So all is well :-)
+                // On successfull login, no body is returned and "submitResponse.json()" will fail. So all is well :-)
             }
 
             if (login_ok) {
@@ -75,7 +81,7 @@ async function doLogin(username, password) {
             catch(e) {}
         }
     } catch (e) {
-        console.log("XoltaBattAuthenticator Error: " + e.toString());
+        logger.error({ err: e },"Error during login");
         Object.assign(auth_response, {
             status: '500',
             message: e.toString(),
@@ -86,7 +92,7 @@ async function doLogin(username, password) {
         duration: (Date.now() - start_time) / 1000, // Convert to seconds
     });
 
-    console.log("Return: " + JSON.stringify(auth_response));
+    logger.info("Return: " + JSON.stringify(auth_response));
     return auth_response;
 }
 
@@ -100,8 +106,8 @@ module.exports = { doLogin };
 
 // doLogin(inputData)
 //     .then((response) => {
-//         console.log(response);
+//         logger.info(response);
 //     })
 //     .catch((error) => {
-//         console.error(error);
+//         logger.error(error);
 //     });
