@@ -19,7 +19,7 @@ async function doLogin(username, password) {
     try {
         logger.info("Xolta: requesting site");
         const browser = await puppeteer.launch({
-            headless: false,
+            headless: true,
             executablePath: '/usr/bin/chromium',
             args: ['--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage'],
         });

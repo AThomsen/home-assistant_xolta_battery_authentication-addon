@@ -1,5 +1,8 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 1.1.4
+ - Hotfix: reenable headless mode.
+
 ## 1.1.3
  - Fix timing causing timeout. Bump packages. More logging.
 
